@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p {
+            margin: 10px 0 3px;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="cacheCtrl">
+    <input type="text" ng-model="newCacheKey"  placeholder="Key">
+    <input type="text" ng-model="newCacheValue"  placeholder="value">
+    <button ng-click="put(newCacheKey,newCacheValue)">Cache</button>
+
+    <p ng-if="keys.length">Cache Values</p>
+    <div ng-repeat="key in keys">
+        <span ng-bind="key"></span>
+        <span>: </span>
+        <b ng-bind="cache.get(key)"></b>
+    </div>
+
+    <p>Cache Info</p>
+    <div ng-repeat="(key, value) in cache.info()">
+        <span ng-bind="key"></span>
+        <span>: </span>
+        <b ng-bind="value"></b>
+    </div>
+
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('cacheCtrl',function($scope,$cacheFactory){
+
+                $scope.keys=[];
+                $scope.cache = $cacheFactory('cacheId');
+                $scope.put=function(key,value){
+                    console.log($scope.cache.get(key))
+                    console.log($scope)
+                    if(angular.isUndefined($scope.cache.get(key))){
+                        $scope.keys.push(key);
+                    }
+                    $scope.cache.put(key,angular.isUndefined(value)?null:value)
+                }
+            })
+</script>
+</body>
+</html>

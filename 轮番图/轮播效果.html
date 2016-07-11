@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0}
+        a{
+            text-decoration: none;
+        }
+        ul,li{list-style: none}
+        .main{
+            margin:20px auto;
+            width:570px;
+            height: 100px;
+            position:relative;
+            overflow: hidden;
+        }
+
+        .main ul{
+            position: absolute;
+            left:0
+        }
+        .main .btn{
+            position:absolute;
+            width:40px;
+            height:40px;
+            text-align: center;
+            line-height:40px;
+            display: block;
+            background: rgba(0,0,0,0.8);
+            color:#fff;
+            top:50%;
+            margin-top:-20px;
+            z-index: 2;
+            cursor: pointer;
+        }
+        .main .carousel-prev{
+            left:0;
+        }
+        .main .carousel-next{
+            right:0;
+        }
+        .main ul li{
+            float:left
+        }
+        .main img{
+            width:144px;
+            height:106px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+     <span href="javascript:;" class="btn carousel-prev">&lt;</span>
+     <ul class="carousel-list">
+        <li class="carousel-item"><img src="images/room_type0.png"/></li>
+        <li class="carousel-item"><img src="images/room_type1.png"/></li>
+        <li class="carousel-item"><img src="images/room_type2.png"/></li>
+        <li class="carousel-item"><img src="images/room_type3.png"/></li>
+        <li class="carousel-item"><img src="images/ConardBJ.png"/></li>
+        <li class="carousel-item"><img src="images/CPBJ.png"/></li>
+     </ul>
+     <span href="javascript:;" class="btn carousel-next">&gt;</span>
+</div>
+
+
+
+<script src="jquery.js"></script>
+<script>
+   ;(function($){
+        $.fn.Carousel=function(options){
+            var defaults={
+                autoPlay:false,
+                cloneNum:1,
+                speed:1000,
+                calNum:1
+            };
+
+            var timer;
+            var dst=$.extend(defaults,options||{});
+            var nowIndex=0;
+
+            var prev=this.find('.carousel-prev'),
+                next=this.find('.carousel-next'),
+                listEle=this.find('.carousel-list'),
+                len=this.find(".carousel-item").length,
+                itemEle=this.find(".carousel-item:lt("+dst.num+")").clone(),
+                width=this.find(".carousel-item").eq(0).width();
+
+            listEle.append(itemEle);
+            listEle.css({width:(len+dst.num)*width});
+
+
+            prev.on('click',function(){
+                prevScroll();
+            });
+            next.on('click',function(){
+                nextScroll();
+            });
+
+
+            function prevScroll(){
+                if(nowIndex==0){
+                    nowIndex=len-1;
+                    listEle.css({left:-len*width*dst.calNum});
+                    listEle.animate({left:-nowIndex*width*dst.calNum})
+                }else{
+                    nowIndex--;
+                    listEle.animate({left:-(dst.width*nowIndex*dst.calNum)})
+                }
+
+                console.log(nowIndex)
+            };
+
+
+            function nextScroll(){
+                if(nowIndex==len-1){
+                    nowIndex=0;
+                    listEle.animate({left:-len*width*dst.calNum},function(){
+                        listEle.css({left:-nowIndex*width*dst.calNum})
+                    })
+                }else{
+                    nowIndex++;
+                    listEle.animate({left:-(width*nowIndex*dst.calNum)})
+                }
+
+                console.log(nowIndex)
+            };
+
+            if(dst.autoPlay){
+                timer=setInterval(nextScroll,dst.speed)
+            }
+        }
+    })(jQuery);
+
+    $(function(){
+        $(".main").Carousel({
+            num:4
+        });
+    })
+</script>
+</body>
+</html>

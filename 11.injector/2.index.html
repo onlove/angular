@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <button onclick="show()">获取</button>
+    <ul id="content"></ul>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .provider('zfHello',function(){
+                this.$get=function(){
+                    return "hello word"
+                }
+            })
+
+
+    function show(){
+        var injector1=angular.injector(['ng','zfMod']);
+        var injector2=angular.injector(['ng','zfMod']);
+        console.log(injector1==injector2);
+
+        document.querySelector("#content").innerHTML=injector2.get('zfHello')
+    }
+</script>
+</body>
+</html>

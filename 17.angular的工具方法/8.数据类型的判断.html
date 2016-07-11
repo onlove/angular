@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script src="../angular.js"></script>
+<script>
+    console.log('==============判断是否是数组类型=================');
+    console.log(angular.isArray(3)); //$ false
+    console.log(angular.isArray([])); //$ true
+    console.log(angular.isArray([1, 2, 3])); //$ true
+    console.log(angular.isArray({name: 'xxx'})); //$ false
+    console.log('==============判断是否是日期类型=================');
+    console.log(angular.isDate('2012-12-02')); //$ false
+    console.log(angular.isDate(new Date())); //$ true
+    console.log('==============判断是否是defined类型=================');
+    console.log(angular.isDefined(undefined)); //$ false
+    console.log(angular.isDefined([])); //$ true
+    console.log('==============判断是否是undefined类型=================');
+    console.log(angular.isUndefined(undefined)) //$ true
+    console.log(angular.isUndefined([])); //$ false
+    console.log('==============判断是否是函数类型=================');
+    console.log(angular.isFunction(function(){})); //$ true
+    console.log(angular.isFunction(3)); //$ false
+    console.log('==============判断是否是Number类型=================');
+    console.log(angular.isNumber(4)); //$ true
+    console.log(angular.isNumber('xxx')); //$ false
+    console.log(angular.isNumber(new Number(4))); //$ false
+    console.log(angular.isNumber(Number(4))); //$ true
+    console.log('==============判断是否是对象类型=================');
+    console.log(angular.isObject('xxx')); //$ false
+    console.log(angular.isObject(null)); //$ false
+    console.log(angular.isObject([])); //$ true
+    console.log(angular.isObject(function(){})); //$ false
+    console.log(angular.isObject({name:'xxx'})); //$ true
+    console.log('==============判断是否是string类型=================');
+    console.log(angular.isString(4)); //$ false
+    console.log(angular.isString('xxx')); //$ true
+    console.log(angular.isString(new String('xxx'))); //$ false
+    console.log(angular.isString(String('xxx'))); //$ true
+</script>
+</body>
+</html>

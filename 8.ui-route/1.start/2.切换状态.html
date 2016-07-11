@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="zfCtrl">
+<a ui-sref="index">index</a>
+<a ui-sref="user">user</a>
+<div ui-view></div>
+<button ng-click="go('index')">切换到主页状态</button>
+<button ng-click="go('user')">切换到用户状态</button>
+
+
+<script src="../../angular.js"></script>
+<script src="../../angular-ui-router.js"></script>
+<script>
+    angular.module('zfMod',['ui.router'])
+            .config(function($stateProvider,$urlRouterProvider){
+                $urlRouterProvider.otherwise('/index')
+                $stateProvider.state('index',{
+                    url:'/index',
+                    template:'index template'
+                }).state('user',{
+                    url:'/user',
+                    template:'user template'
+                })
+            })
+            .controller('zfCtrl',function($scope,$state){
+                $scope.go=function(sta){
+                    $state.go(sta)
+                }
+            })
+</script>
+</body>
+</html>

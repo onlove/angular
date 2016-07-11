@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script src="../angular.js"></script>
+
+<script>
+    var dst={
+        name:"zf",
+        country:'China'
+    }
+
+    var src={
+        name:'fz',
+        age:10
+    }
+
+    angular.extend(dst,src);
+
+    console.log(src,dst)
+</script>
+</body>
+</html>

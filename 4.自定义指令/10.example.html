@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{margin:0;padding:0}
+        .title{
+            width:200px;
+            height:30px;
+            border:1px solid red;
+        }
+        .content{
+            width:400px;
+            height:200px;
+            border:1px solid green;
+        }
+    </style>
+</head>
+<body>
+<openers>
+    <opener title="这是第一个标题"><div>这是第一个内容</div></opener>
+    <opener title="这是第二个标题"><div>这是第二个内容</div></opener>
+    <opener title="这是第三个标题"><div>这是第三个内容</div></opener>
+</openers>
+
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .directive('opener',function(){
+                return {
+                    restrict: 'E',
+                    templateUrl: 'exp.html',
+                    transclude: true,
+                    scope: {
+                        title: '@title'
+                    },
+                    require: '^openers',
+                    link: function (scope, element, attrs, openersCtrl) {
+                        scope.toggle = function () {
+                            openersCtrl.open(scope);
+                        }
+
+                        openersCtrl.add(scope);
+                        console.log(scope)
+                    }
+                }
+
+            })
+            .directive('openers',function(){
+                return {
+                    restrict:'E',
+                    controller:function($scope){
+                        var openerScopes=[];
+                        this.add=function(openerScope){
+                            openerScopes.push(openerScope)
+                        };
+                        this.open=function(scope){
+                            openerScopes.forEach(function(current){
+                                if(scope==current){
+                                    current.open=!current.open
+                                }else{
+                                    current.open=false;
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+</script>
+</body>
+</html>

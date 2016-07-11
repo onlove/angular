@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="zfCtrl">
+<button ng-click="goPlace('state2.part2')">切换state2.part2</button>
+<br/>
+<a ui-sref="state1">state1</a>
+<a ui-sref="state2">state2</a>
+
+<div style="border:1px solid red" ui-view></div>
+<script src="../../angular.js"></script>
+<script src="../../angular-ui-router.js"></script>
+<script>
+    angular.module('zfMod',['ui.router'])
+            .config(function($stateProvider,$urlRouterProvider){
+                $urlRouterProvider.otherwise('/state1');
+                $stateProvider.state('state1', {
+                    url: '/state1',
+                    templateUrl: 'state1.html'
+                }).state('state2', {
+                    url: '/state2',
+                    templateUrl: 'state2.html'
+                }).state('state1.part1', {
+                    url: '/part1',
+                    template: 'state1.part1 content'
+                }).state('state1.part2', {
+                    url: '/part2',
+                    template: 'state1.part2 content'
+                }).state('state2.part1', {
+                    url: '/part1',
+                    template: 'state2.part1 content'
+                }).state('state2.part2', {
+                    url: '/part2',
+                    template: 'state2.part2 content'
+                })
+            })
+            .controller('zfCtrl',function($rootScope,$scope,$state){
+                $scope.goPlace=function(sta){
+                    $state.go(sta)
+                }
+            })
+</script>
+</body>
+</html>

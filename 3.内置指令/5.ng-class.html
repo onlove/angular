@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body ng-controller="zfCtrl">
+<form name="myForm" novalidate>
+    <div class="container-fluid">
+        <div class="form-group" ng-class="{'has-error':username.length<=6,'has-success':username.length>6}">
+            <input type="text" class="form-control" ng-model="username">
+        </div>
+    </div>
+</form>
+<pre>{{myForm | json}}</pre>
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope,$interval){
+
+            })
+</script>
+</body>
+</html>

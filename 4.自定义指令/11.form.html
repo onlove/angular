@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <form name="userForm" class="form-horizontal">
+        <div class="form-group">
+            <label for="email">邮箱</label>
+            <input type="email" id="email" class="form-control" ng-model="email" name="email">
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-default" value="提交">
+        </div>
+    </form>
+</div>
+
+<pre>{{userForm | json }}</pre>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+</script>
+</body>
+</html>

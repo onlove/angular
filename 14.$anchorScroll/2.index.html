@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .anchor{
+            border: 2px dashed DarkOrchid;
+            padding: 10px 10px 200px 10px;
+
+        }
+        .fixed-header{
+            background-color: rgba(0, 0, 0, 0.2);
+            height: 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+        .fixed-header > a {
+            display: inline-block;
+            margin: 5px 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="fixed-header" ng-controller="headerCtrl">
+    <a href="" ng-click="gotoAnchor(x)" ng-repeat="x in [1,2,3,4,5]">
+        Go to anchor {{x}}
+    </a>
+</div>
+<div id="anchor{{x}}" class="anchor" ng-repeat="x in [1,2,3,4,5]">
+Anchor {{x}} of 5
+</div>
+</body>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('headerCtrl',function($scope,$location,$anchorScroll){
+                $scope.gotoAnchor=function(x){
+                    var newHash = 'anchor' + x;
+                    if($location.hash()!=newHash){
+                        $location.hash('anchor'+x);
+                    }else{
+                        $anchorScroll()
+                    }
+                }
+            })
+            .run(function($anchorScroll){
+                $anchorScroll.yOffset=50;// 总是滚动额外的50像素
+            })
+</script>
+</html>

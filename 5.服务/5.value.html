@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="zfCtrl">
+    <input type="text" ng-model="a">
+    <select ng-model="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" ng-model="b">
+    <input type="button" value="=" ng-click="cal()">
+    {{result}}
+    <div dir-one="zfCalculator">ddd</div>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope,zfCalculator){
+                $scope.cal=function(){
+                    $scope.result=zfCalculator[$scope.op]($scope.a,$scope.b)
+                }
+            })
+            .directive('dirOne', dirOne)
+            .value('zfCalculator',{
+//               '+':function(a,b){return a+b;},
+//               '-':function(a,b){return a-b;},
+//               '*':function(a,b){return a*b;},
+//               '/':function(a,b){return a/b;}
+                one:1,
+                two:2
+            })
+
+
+    function dirOne(zfCalculator){
+        return {
+            restrict:'A',
+            link:function(scope,element,attrs){
+                console.log(zfCalculator.one)
+                element.on('click',function(){
+                    console.log(scope.cal(1,2));
+                })
+                zfCalculator.one+=2;
+                console.log(zfCalculator.one)
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

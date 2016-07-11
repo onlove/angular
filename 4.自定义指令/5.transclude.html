@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body>
+<div class="container">
+    <alert title="这是指令的标题">这是指令内部的内容</alert>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .directive('alert',function(){
+                return {
+                    transclude:true,
+                    replace:true,
+                    restrict:'E',
+                    scope:{
+                        title:'@title'
+                    },
+                    templateUrl:'trans.html'
+                }
+            })
+</script>
+</body>
+</html>

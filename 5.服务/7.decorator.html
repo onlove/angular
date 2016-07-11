@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="zfCtrl">
+    <button ng-click="log()">点击</button>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope,$log){
+                $scope.log=function(){
+                    $log.error('hello')
+                }
+            })
+            .config(function($provide){
+                $provide.decorator('$log',function($delegate){
+                    var lastLog=$delegate.error;
+                    $delegate.error=function(){
+                        var args=Array.prototype.slice.call(arguments);
+                        args.unshift(new Date());
+                        lastLog.apply($delegate,args)
+                    }
+                    return $delegate
+                })
+            })
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="zfCtrl">
+<form name="userForm">
+    <label for="userName">name:</label>
+    <input type="text" name="userName" ng-model="user.name" id="userName" ng-model-options="{getterSetter:true}">
+</form>
+<pre>user.name=<span ng-bind="user.name('one')"></span></pre>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope){
+                var _name='login';
+                $scope.user={
+                    name:function(newName){
+                        return arguments.length ? (_name = newName) : _name;
+                    }
+                }
+            })
+
+</script>
+</body>
+</html>

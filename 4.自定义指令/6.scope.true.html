@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<hello></hello>
+<hello></hello>
+<hello></hello>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .directive('hello',function(){
+                return {
+                    restirct:'E',
+                    replace:'true',//为true时，创立独立scope
+                    scope:true,
+                    template:'<input type="text" ng-model="name"/>'
+                }
+            })
+</script>
+</body>
+</html>

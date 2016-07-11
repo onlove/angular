@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="zfCtrl">
+    <input type="text" ng-model="a">
+    <select ng-model="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" ng-model="b">
+    <input type="button" value="=" ng-click="cal()"/>
+    {{result}}
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope,zfCalculator){
+                $scope.cal=function(){
+                    $scope.result=zfCalculator('人民币',$scope.a,$scope.op,$scope.b)
+                }
+            })
+            .factory('zfCalculator',function(){
+                return function(prefix,a,op,b){
+                    return prefix+eval(a+op+b)
+                }
+            })
+</script>
+</body>
+</html>

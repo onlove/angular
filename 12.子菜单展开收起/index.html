@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            font-size:12px;
+            font-family:'MICROSOFT YAHEI';
+            color:#005580;
+        }
+        .submenu span {
+            border:1px solid #EFEFEF;
+            background:#F7F7F7;
+            padding:4px 8px;
+            cursor:pointer
+        }
+        .submenu ul li{
+            color:#169FE7
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="submenu">
+    <expender>
+        <li ng-repeat="list in lists">{{list}}</li>
+    </expender>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    var lists = ['服饰','箱包','美妆','生活','家装'];
+    angular.module('zfMod',[])
+            .controller('subMenu',function($scope){
+
+            })
+            .directive('expender',function(){
+                return {
+                    restrict:'E',
+                    replace:true,
+                    templateUrl:'./views/submenu.html',
+                    transclude:true,
+                    link:function(scope,element,attrs){
+                        scope.toggle=function(){
+                            scope.ifShow=!scope.ifShow;
+                            scope.text=scope.ifShow?'点击收起':'点击展开'
+                        }
+
+                    }
+
+                }
+            })
+            .controller('submenu',function($scope){
+                $scope.text="点击展开";
+                $scope.lists=lists;
+            })
+</script>
+</body>
+</html>

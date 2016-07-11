@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #scrollArea {
+            height: 280px;
+            overflow: auto;
+        }
+        #top {
+            display: block;
+            margin-top: 2000px;
+        }
+    </style>
+</head>
+<body>
+<div id="scrollArea" ng-controller="scrollCtrl">
+    <a ng-click="gotoBottom()">Go to bottom</a>
+    <a id="top"></a> You're at the bottom!
+</div>
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('scrollCtrl',function($scope, $location, $anchorScroll){
+                $scope.gotoBottom=function(){
+                    $location.hash('top');
+
+                    $anchorScroll();
+                }
+            })
+</script>
+</body>
+</html>

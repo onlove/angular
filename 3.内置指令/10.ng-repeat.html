@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body>
+<div ng-controller="myCtrl">
+   <h1 ng-repeat="x in records">{{x}}</h1>
+</div>
+<table ng-controller="tableCtrl" border="1">
+    <tr ng-repeat="x in records">
+        <td>{{x.Name}}</td>
+        <td>{{x.Country}}</td>
+    </tr>
+</table>
+<br/><br/>
+<table ng-controller="tableObjectCtrl" border="1">
+    <tr ng-repeat="(x,y) in myObj">
+        <td>{{x}}</td>
+        <td>{{y}}</td>
+    </tr>
+</table>
+<br/><br/>
+
+<div class="container-fluid" ng-init="phones=[{name:'phones'},{name:'mi'},{name:'sangsum'}]">
+    <div class="row-fluid">
+        Search:<input type="text" ng-model="query"/>
+        <ul class="phones">
+            <li ng-repeat="phone in phones | filter:query">{{phone.name}}</li>
+        </ul>
+    </div>
+</div>
+
+<div ng-controller="arrayCtrl">
+    <div ng-repeat="innerList in list" ng-init="outerIndex = $index">
+        <div ng-repeat="value in innerList" ng-init="innerIndex = $index">
+            <span class="example-init">list[ {{outerIndex}} ][ {{innerIndex}} ] = {{value}};</span>
+        </div>
+    </div>
+</div>
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('myCtrl',function($scope){
+                $scope.records=['1','2','3','4']
+            })
+            .controller('tableCtrl',function($scope){
+                $scope.records=[
+                    {
+                        "Name" : "Alfreds Futterkiste",
+                        "Country" : "Germany"
+                    },{
+                        "Name" : "Berglunds snabbköp",
+                        "Country" : "Sweden"
+                    },{
+                        "Name" : "Centro comercial Moctezuma",
+                        "Country" : "Mexico"
+                    },{
+                        "Name" : "Ernst Handel",
+                        "Country" : "Austria"
+                    }
+                ]
+            })
+            .controller('tableObjectCtrl',function($scope){
+                $scope.myObj = {
+                    "Name" : "Alfreds Futterkiste",
+                    "Country" : "Germany",
+                    "City" : "Berlin"
+                }
+            })
+            .controller('arrayCtrl', ['$scope', function($scope) {
+                $scope.list = [['a', 'b','1'], ['c', 'd','2'],['e','f','g']];
+            }]);
+</script>
+
+</body>
+</html>

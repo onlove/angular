@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="zfCtrl">
+{{zhangsan}}<br/>
+{{lisi}}
+<person namex="zhangsan"></person>
+<person namex="lisi"></person>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .directive('person',function(){
+                return {
+                    replace:true,
+                    restrict:'E',
+                    scope:{
+                        namey:'=namex'
+                    },
+                    template:'<div>姓名:{{namey}} <input type="text" ng-model="namey"/></div>'
+                }
+            })
+            .controller('zfCtrl',function($scope){
+                $scope.zhangsan='张三';
+                $scope.lisi='李四';
+
+                $scope.greet=function(name,word){
+                    alert(name+' '+word)
+                }
+            })
+</script>
+</body>
+</html>

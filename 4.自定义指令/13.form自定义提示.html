@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body ng-controller="formCtrl">
+<div class="container">
+    <form novalidate="novalidate" name="userForm">
+        <div class="form-group" ng-class="{'has-success':userForm.username.$valid&&userForm.username.$dirty,'has-error':userForm.username.$invalid&&userForm.username.$dirty}">
+            <label for="username">邮箱</label>
+            <input zf-errors type="text" ng-model="username" ng-maxlength="12" ng-required="true" name="username" id="username" class="form-control">
+        </div>
+        <div class="form-group" ng-class="{'has-success':userForm.email.$valid&&userForm.email.$dirty,'has-error':userForm.email.$invalid&&userForm.email.$dirty}">
+            <label for="email">邮箱</label>
+            <input zf-errors type="email" ng-model="email" ng-minlength="3" ng-required="true" name="email" id="email" class="form-control">
+        </div>
+    </form>
+</div>
+<pre>{{userForm | json }}</pre>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('formCtrl',function($scope){
+
+            })
+            .directive('zfErrors',function($compile){
+                return {
+                    restrict:'A',
+                    require:'ngModel',
+                    link:function(scope,element,attrs,ngModelCtrl){
+                        //console.log(ngModelCtrl)
+
+                        var subScope=scope.$new(scope);
+
+                        subScope.hasError=function(){
+                            return ngModelCtrl.$invalid;
+                        }
+
+                        subScope.errors=function(){
+                            return ngModelCtrl.$error;
+                        }
+
+                        var tpl='<p ng-show="hasError()" ng-repeat="(key,value) in errors()" class="help-block">{{key | errors}}</p>';
+
+                        var message=$compile(tpl)(subScope);
+                        element.after(message);
+                    }
+                }
+            })
+            .filter('errors',function(messages){
+                return function(input){
+                    return messages[input];
+                }
+            })
+            .constant('messages',{
+                'require':'必填',
+                'email':'必须是邮箱',
+                'minlength':'最小不小于3位',
+                'maxlength':'最大不超过12位'
+            })
+</script>
+</body>
+</html>

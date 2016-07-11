@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="zfCtrl" style="background:red;color:white;width:200px;height:200px;line-height:200px" ng-mouseover="show()" ng-mouseout="hide()">
+        <span ng-hide="isHide">鼠标放上去显示/鼠标离开后隐藏</span>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope){
+                $scope.isHide=true;
+                $scope.show=function(){
+                    $scope.isHide=false;
+                }
+                $scope.hide=function(){
+                    $scope.isHide=true;
+                }
+            })
+</script>
+</body>
+</html>

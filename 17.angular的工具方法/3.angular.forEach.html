@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script src="../angular.js"></script>
+<script>
+    var obj={
+        name:'zf',
+        country:'China'
+    };
+
+    var aObj=angular.forEach(obj,function(value,key){
+        console.log(key + ":" +value)
+    })
+
+    console.log(aObj)
+
+    var arr=['zf','fz'];
+
+    angular.forEach(arr,function(item,index){
+        console.log(index+":"+ item +"-form"+this.country)
+    },obj)
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../bootstrap.css">
+</head>
+<body>
+
+<div ng-controller="zfCtrl" class="container">
+    <form novalidate="novalidate">
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" ng-model="user.name" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>E-mail: </label>
+            <input type="email" ng-model="user.email" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Gender:</label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" ng-model="user.gender" > male
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="gender" ng-model="user.gender" > female
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="button" class="btn btn-primary" ng-click="reset()" value="RESET">
+            <input type="button" class="btn btn-warning" ng-click="update(user)" value="SAVE">
+        </div>
+    </form>
+    <pre>form = {{user | json}}</pre>
+    <pre>master = {{master | json}}</pre>
+</div>
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope){
+                $scope.master={};
+                $scope.update=function(user){
+                    $scope.master=angular.copy(user);
+                    console.log($scope.master)
+                }
+                $scope.reset=function(){
+                    angular.copy($scope.user,$scope.user)
+                }
+
+                $scope.reset();
+            })
+</script>
+</body>
+</html>

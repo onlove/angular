@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="zfCtrl">
+    <div  ng-init="name='zfpx'">
+        {{name}}
+        <span ng-bind="name"></span>
+    </div>
+</div>
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope,$interval){
+                $scope.name='feng';
+                $interval(function(){
+                    console.log($scope.name)
+                },1000)
+            })
+    //因浏览器需要加载页面，对于首个页面中的数据绑定操作，最好用ng-bind，避免未渲染被用户看到
+</script>
+</body>
+</html>

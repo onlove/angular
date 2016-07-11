@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        [ng-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="zfCtrl">
+    <span ng-cloak class="ng-cloak">{{one}} {{two}}</span>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope,currencyFilter){
+                $scope.num=currencyFilter(888.888);
+                $scope.one = "tow";
+                $scope.two ="thress";
+            })
+            .filter('add',function(){
+                return function(input){
+                    var sum=0;
+                    for(var i=0;i<arguments.length;i++){
+                        sum+=arguments[i]
+                    }
+                    return sum
+                }
+            })
+</script>
+</body>
+</html>

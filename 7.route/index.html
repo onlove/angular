@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="#/index">index</a>
+<a href="#/user">user</a>
+<div ng-view></div>
+<script src="../angular.js"></script>
+<script src="../angular-route.js"></script>
+<script>
+    angular.module('zfMod',['ngRoute'])
+            .config(function($routeProvider){
+                console.log($routeProvider);
+                $routeProvider.when('/',{
+                    templateUrl:'root.html',
+                    controller:'rootCtrl'
+                }).when('/index',{
+                    templateUrl:'i.html',
+                }).when('/user',{
+                    template:'<h1>user</h1>'
+                }).otherwise({
+                    redirectTo:'/'
+                })
+            })
+            .controller('rootCtrl',function($scope){
+                $scope.name="root"
+            })
+</script>
+</body>
+</html>

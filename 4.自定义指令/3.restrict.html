@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<hello></hello>
+<div hello></div>
+<div class="hello"></div>
+<!-- directive:help -->
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .directive('hello',function(){
+                return {
+                    replace:true,
+                    restrict:'E',
+                    template:'<h1>hello</h1>'
+                }
+            })
+</script>
+</body>
+</html>

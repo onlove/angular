@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="zfMod">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div ng-controller="zfCtrl">
+    <div ng-show="isShow">2秒后隐藏/2秒后显示</div>
+</div>
+
+<script src="../angular.js"></script>
+<script>
+    angular.module('zfMod',[])
+            .controller('zfCtrl',function($scope,$interval){
+                $scope.isShow=true;
+                $interval(function(){
+                    $scope.isShow=!$scope.isShow
+                },2000)
+            })
+</script>
+</body>
+</html>
